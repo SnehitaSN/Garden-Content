@@ -13,7 +13,7 @@ import random
 load_dotenv()
 
 # Initialize OpenAI client
-client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 # Email sender configuration
 EMAIL_SENDER = os.getenv("EMAIL_SENDER")
@@ -60,7 +60,7 @@ def generate_blog_post(product_name, product_description, keywords, tone="inform
     
     try:
         # Call the OpenAI API
-        response = client.chat.completions.create(
+        response = openai.ChatCompletion.create(
             model="gpt-4o",
             messages=[
                 {"role": "system", "content": system_prompt},
@@ -117,7 +117,7 @@ def generate_social_media_posts(product_name, product_description, keywords, pla
     
     try:
         # Call the OpenAI API
-        response = client.chat.completions.create(
+        response = openai.ChatCompletion.create(
             model="gpt-4o",
             messages=[
                 {"role": "system", "content": system_prompt},
